@@ -53,5 +53,11 @@ class MyApplication : Application() {
             name = "Qwen 2.5 0.5B Instruct Q6_K",
             type = "LLM"
         )
+
+        addModelFromURL(
+            url = "https://huggingface.co/prithivMLmods/SmolLM2-360M-GGUF/resolve/main/SmolLM2-360M.Q8_0.gguf",
+            name = "SmolLM2 360M Q8_0",
+            type = "LLM"
+        )
     }
 }
