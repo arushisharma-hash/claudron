@@ -1,131 +1,82 @@
-# RunAnywhere SDK - Simple Chat App
+Cauldron - An AI Idea Incubator for Students
 
-A simple Android chat application demonstrating the RunAnywhere SDK for on-device AI inference.
+Team: Witchware
+Team Members: Akshitha Maruru, Arushi Sharma, Prathigya Malla
 
-## What This App Does
+Abstract
 
-This is a minimal example showing how to:
+Many innovative ideas from university students fail to move beyond the "what if" stage. "Cauldron" solves this by providing a native Android application that helps students turn raw ideas into structured summaries, privately and securely.
 
-1. Initialize the RunAnywhere SDK
-2. Download AI models (LLMs)
-3. Load models into memory
-4. Run text generation with streaming responses
+Our app, built tonight by modifying the mandatory Hackss boilerplate, uses the RunAnywhere SDK for 100% on-device, "serverless" AI inference. This ensures student ideas remain private and are processed instantly, even without an internet connection, fulfilling the core "private on-device idea summary" feature from our PPT.
 
-## Features
+🚀 Hackathon Submission
 
-- **Model Management**: Download and load AI models directly in the app
-- **Real-time Streaming**: See AI responses generate word-by-word
-- **Simple UI**: Clean Jetpack Compose interface
-- **On-Device AI**: All inference runs locally on your Android device
+GitHub Repository: https://github.com/arushisharma-hash/claudron
 
-## Quick Start
+Demo Video Link: [PASTE YOUR GOOGLE DRIVE LINK HERE] (This is mandatory as our project is a native Android app).
 
-### 1. Build and Run
+PPT Link: [PASTE YOUR GOOGLE DRIVE LINK TO THE PPT HERE]
 
-```bash
-./gradlew assembleDebug
-# Or open in Android Studio and click Run
-```
+Note on "Deployment Link"
 
-### 2. Download a Model
+Per the submission rules, "Either provide the deployment link or a demo video — one of them is mandatory."
 
-1. Launch the app
-2. Tap "Models" in the top bar
-3. Choose a model (we recommend starting with "SmolLM2 360M Q8_0" - only 119 MB)
-4. Tap "Download" and wait for it to complete
+Our project is a native Android app built specifically to showcase the mandatory RunAnywhere.ai SDK, which performs on-device inference. A web deployment link is not possible for this native technology. We have provided a comprehensive demo video in its place, as per the rules.
 
-### 3. Load the Model
+🛠️ Tech Stack
 
-1. Once downloaded, tap "Load" on the model
-2. Wait for "Model loaded! Ready to chat." message
+Platform: Native Android (Kotlin)
 
-### 4. Start Chatting!
+UI: Jetpack Compose
 
-1. Type a message in the text field
-2. Tap "Send"
-3. Watch the AI response generate in real-time
+Mandatory SDK 1: RunAnywhere.ai SDK (Used for all on-device LLM generation, model management, and inference).
 
-## Available Models
+Mandatory SDK 2: Firebender (Used as our AI coding assistant inside Android Studio to refactor the Hackss boilerplate, write Compose UI, and debug our ViewModel).
 
-The app comes pre-configured with two models:
+🏃‍♂️ How to Run This Project (Demo Video Flow)
 
-| Model | Size | Quality | Best For |
-|-------|------|---------|----------|
-| SmolLM2 360M Q8_0 | 119 MB | Basic | Testing, quick responses |
-| Qwen 2.5 0.5B Instruct Q6_K | 374 MB | Better | General conversations |
+This is the exact flow we show in our demo video:
 
-## Technical Details
+Clone this repository and open it in Android Studio.
 
-### SDK Components Used
+Build & Run the app on an Android Emulator (or physical device).
 
-- **RunAnywhere Core SDK**: Component architecture and model management
-- **LlamaCpp Module**: Optimized llama.cpp inference engine with 7 ARM64 variants
-- **Kotlin Coroutines**: For async operations and streaming
+The app opens on the "Cauldron" screen. We show that the "Refine" button is disabled because no model is loaded.
 
-### Architecture
+Navigate to the "Models" tab using the bottom navigation bar.
 
-```
-MyApplication (initialization)
-    ↓
-ChatViewModel (state management)
-    ↓
-ChatScreen (UI layer)
-```
+Tap "Download" on a model (we use SmolLM2 360M for a fast demo).
 
-### Key Files
+Once downloaded, tap "Load" on the same model.
 
-- `MyApplication.kt` - SDK initialization and model registration
-- `ChatViewModel.kt` - Business logic and state management
-- `MainActivity.kt` - UI components and composables
+Navigate back to the "Cauldron" tab. The "Refine" button is now enabled.
 
-## Requirements
+Type an idea into the text box (e.g., "A tiffin delivery service for students on campus").
 
-- Android 7.0 (API 24) or higher
-- ~200 MB free storage (for smallest model)
-- Internet connection (for downloading models)
+Tap "Refine (On-Device)".
 
-## Troubleshooting
+The app shows a loading spinner, then streams the AI-generated summary 100% locally using the RunAnywhere SDK.
 
-### Models not showing up
+✅ Hackathon Requirements Met
 
-- Wait a few seconds for SDK initialization
-- Tap "Refresh" in the Models section
-- Check logcat for initialization errors
+1. Use of RunAnywhere.ai SDK
 
-### Download fails
+We use the SDK as the core "brain" of our app. It handles model downloading, loading, and all text generation. This is visible in:
 
-- Check internet connection
-- Ensure sufficient storage space
-- Verify INTERNET permission in AndroidManifest.xml
+app/src/main/java/com/runanywhere/hackss/MyApplication.kt: Registers the models.
 
-### App crashes during generation
+app/src/main/java/com/runanywhere/hackss/ui/ModelsScreen.kt (from base repo): Shows the UI for downloading/loading.
 
-- Try the smaller model (SmolLM2 360M)
-- Close other apps to free memory
-- Check that `largeHeap="true"` is set in AndroidManifest.xml
+app/src/main/java/com/runanywhere/hackss/ChatViewModel.kt: Listens to the loaded model and calls RunAnywhere.generate() with our custom prompt.
 
-### Generation is slow
+app/src/main/java/com/runanywhere/hackss/MainActivity.kt: Contains the navigation (MainScreen) to switch between our CauldronScreen and the ModelsScreen.
 
-- This is normal for on-device inference
-- Smaller models run faster
-- Performance depends on device CPU
+2. Use of Firebender
 
-## Next Steps
+We used the Firebender AI assistant plugin (a mandatory tool) extensively within Android Studio to accelerate our development tonight.
 
-Want to customize this app? Try:
+Refactoring: We used Firebender's chat (Cmd+L) to understand the original MainActivity.kt file. We then used inline edit (Cmd+K) to refactor the ChatScreen composable (which was inside MainActivity.kt) into our new CauldronScreen composable.
 
-1. **Add more models** - Edit `MyApplication.kt` → `registerModels()`
-2. **Customize UI** - Edit `MainActivity.kt` compose functions
-3. **Add system prompts** - Modify message format in `ChatViewModel.kt`
-4. **Persist chat history** - Add Room database or DataStore
-5. **Add model parameters** - Explore temperature, top-k, top-p settings
+Code Generation: We used Firebender to write the Jetpack Compose boilerplate for our new UI in MainActivity.kt (inside CauldronScreen), such as the OutlinedTextField and Button layout.
 
-## Resources
-
-- [Full Quick Start Guide](app/src/main/java/com/runanywhere/startup_hackathon20/QUICK_START_ANDROID.md)
-- [RunAnywhere SDK Repository](https://github.com/RunanywhereAI/runanywhere-sdks)
-- [SDK Documentation](https://github.com/RunanywhereAI/runanywhere-sdks/blob/main/CLAUDE.md)
-
-## License
-
-This example app follows the license of the RunAnywhere SDK.
+Debugging & Logic: We used Firebender to help write and debug the new "Cauldron" system prompt and state management logic inside our ChatViewModel.kt.
