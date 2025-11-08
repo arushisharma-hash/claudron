@@ -17,11 +17,7 @@ Demo Video Link: [PASTE YOUR GOOGLE DRIVE LINK HERE] (This is mandatory as our p
 
 PPT Link: [PASTE YOUR GOOGLE DRIVE LINK TO THE PPT HERE]
 
-Note on "Deployment Link"
 
-Per the submission rules, "Either provide the deployment link or a demo video — one of them is mandatory."
-
-Our project is a native Android app built specifically to showcase the mandatory RunAnywhere.ai SDK, which performs on-device inference. A web deployment link is not possible for this native technology. We have provided a comprehensive demo video in its place, as per the rules.
 
 🛠️ Tech Stack
 
